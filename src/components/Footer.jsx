@@ -9,7 +9,7 @@ export default function Footer() {
           <div className="footer-logo-icon">
             <BarChart2 size={16} />
           </div>
-          <span>Análise de Dados — Relatório de Atendimento</span>
+          <span>Análise de Dados — Relatório de Atendimento UnicoDrop</span>
         </div>
         <div className="footer-meta">
           <span>Período: 01/03/2026 – 17/03/2026</span>
@@ -17,7 +17,6 @@ export default function Footer() {
           <span>341 Tickets Analisados</span>
           <span className="footer-dot">·</span>
           <span style={{ display: "flex", alignItems: "center", gap: 4 }}>
-            Feito com <Heart size={12} color="#ef4444" fill="#ef4444" /> em
             React
           </span>
         </div>

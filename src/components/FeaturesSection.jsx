@@ -1,14 +1,58 @@
-import { Sparkles, Globe, Package, Truck, ShoppingCart, Smartphone, Store, Plus } from 'lucide-react'
+import { Sparkles, Globe, Package, Truck, ShoppingCart, Smartphone, Store, Plus, Users, Link } from 'lucide-react'
+import { useState } from 'react'
 import './FeaturesSection.css'
 
 const features = [
   {
-    icon: Globe,
-    name: 'Loja Internacional',
+    icon: Smartphone,
+    name: 'API WhatsApp',
+    requests: 4,
+    color: '#10B981', // Green
+    desc: 'Conexão com a API oficial do WhatsApp',
+  },
+  {
+    icon: Truck,
+    name: 'Movimentações Anjun',
     requests: 2,
     color: '#3B82F6', // Blue
-    desc: 'Suporte para vendas internacionais',
+    desc: 'Atualizações internacionais do código Anjun',
   },
+  {
+    icon: Store,
+    name: 'Checkout Luna',
+    requests: 2,
+    color: '#EC4899', // Pink
+    desc: 'Integração com checkout da Luna',
+  },
+  {
+    icon: Truck,
+    name: 'Movimentações 888',
+    requests: 1,
+    color: '#F59E0B', // Orange
+    desc: 'Atualizações internacionais do código 888',
+  },
+  {
+    icon: Package,
+    name: 'Atualização 17 Tracking',
+    requests: 1,
+    color: '#8B5CF6', // Purple
+    desc: 'Integração e melhorias do 17 Tracking',
+  },
+  {
+    icon: Users,
+    name: 'Grupo de Membros',
+    requests: 1,
+    color: '#4F46E5', // Indigo
+    desc: 'Comunidade para networking e troca de cases',
+  },
+  {
+    icon: Link,
+    name: 'Conexão entre Contas',
+    requests: 1,
+    color: '#06B6D4', // Cyan
+    desc: 'Administrar múltiplos e-commerces',
+  },
+  // Restore old requested items:
   {
     icon: Package,
     name: 'Dropi',
@@ -18,7 +62,7 @@ const features = [
   },
   {
     icon: Truck,
-    name: 'Plugin de Rastreio na Nuvem',
+    name: 'Plugin de Rastreio Nuvem',
     requests: 1,
     color: '#06B6D4', // Cyan
     desc: 'Rastreio em tempo real cloud',
@@ -31,22 +75,8 @@ const features = [
     desc: 'Integração com checkout Zedy',
   },
   {
-    icon: Smartphone,
-    name: 'API WhatsApp',
-    requests: 3,
-    color: '#10B981', // WhatsApp Green (Unico Green here)
-    desc: 'Acesso à API oficial do WhatsApp',
-  },
-  {
-    icon: Store,
-    name: 'Checkout da Luna',
-    requests: 1,
-    color: '#EC4899', // Pink
-    desc: 'Integração com checkout Luna',
-  },
-  {
     icon: Plus,
-    name: 'Múltiplos Rastreios por Pedido',
+    name: 'Multi Rastreios por Pedido',
     requests: 1,
     color: '#F59E0B', // Orange
     desc: 'Adicionar mais de um rastreio',
@@ -54,8 +84,16 @@ const features = [
 ]
 
 const totalRequests = features.reduce((a, b) => a + b.requests, 0)
+const maxRequests = Math.max(...features.map(f => f.requests), 1)
+const mostRequested = features.reduce((prev, current) => (prev.requests > current.requests) ? prev : current)
 
 export default function FeaturesSection() {
+  const [showAll, setShowAll] = useState(false)
+  
+  // Sort them naturally if needed, but they are arranged properly above.
+  const sortedFeatures = [...features].sort((a, b) => b.requests - a.requests)
+  const displayFeatures = showAll ? sortedFeatures : sortedFeatures.slice(0, 7)
+
   return (
     <section className="features-section">
       <div className="container">
@@ -68,7 +106,7 @@ export default function FeaturesSection() {
         </p>
 
         <div className="features-grid">
-          {features.map((feat, i) => {
+          {displayFeatures.map((feat, i) => {
             const IconComp = feat.icon
             return (
               <div className="card feature-card animate-fade-up" key={i}
@@ -93,7 +131,7 @@ export default function FeaturesSection() {
                   <div
                     className="feature-bar-fill"
                     style={{
-                      width: `${(feat.requests / 3) * 100}%`,
+                      width: `${(feat.requests / maxRequests) * 100}%`,
                       background: `linear-gradient(90deg, ${feat.color}, ${feat.color}CC)`,
                     }}
                   ></div>
@@ -122,10 +160,37 @@ export default function FeaturesSection() {
             <div className="divider" style={{ margin: '16px 0' }}></div>
             <div className="feature-summary-stat">
               <span style={{ color: 'var(--text-secondary)', fontSize: 14 }}>Pedido mais urgente</span>
-              <span className="badge badge-green">API WhatsApp ×3</span>
+              <span className="badge badge-green" style={{ background: `${mostRequested.color}20`, color: mostRequested.color, borderColor: `${mostRequested.color}40` }}>
+                {mostRequested.name} &times;{mostRequested.requests}
+              </span>
             </div>
           </div>
         </div>
+        
+        {features.length > 7 && (
+          <div style={{ display: 'flex', justifyContent: 'center', marginTop: 32 }}>
+            <button 
+              onClick={() => setShowAll(!showAll)}
+              style={{
+                background: 'var(--bg-card)', 
+                border: '1px solid var(--border)', 
+                padding: '10px 24px', 
+                borderRadius: '100px',
+                color: 'var(--text-primary)', 
+                fontWeight: 600, 
+                cursor: 'pointer',
+                display: 'flex', 
+                alignItems: 'center', 
+                gap: 8,
+                transition: 'all 0.2s'
+              }}
+              onMouseOver={(e) => { e.currentTarget.style.borderColor = 'var(--text-secondary)'; e.currentTarget.style.transform = 'translateY(-1px)' }}
+              onMouseOut={(e) => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.transform = 'none' }}
+            >
+              {showAll ? 'Mostrar menos' : `Ver outras solicitações (${features.length - 7})`}
+            </button>
+          </div>
+        )}
       </div>
     </section>
   )
