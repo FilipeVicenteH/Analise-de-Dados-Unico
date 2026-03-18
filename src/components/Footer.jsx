@@ -1,0 +1,27 @@
+import { BarChart2, Heart } from "lucide-react";
+import "./Footer.css";
+
+export default function Footer() {
+  return (
+    <footer className="footer">
+      <div className="container footer-inner">
+        <div className="footer-brand">
+          <div className="footer-logo-icon">
+            <BarChart2 size={16} />
+          </div>
+          <span>Análise de Dados — Relatório de Atendimento</span>
+        </div>
+        <div className="footer-meta">
+          <span>Período: 01/03/2026 – 17/03/2026</span>
+          <span className="footer-dot">·</span>
+          <span>341 Tickets Analisados</span>
+          <span className="footer-dot">·</span>
+          <span style={{ display: "flex", alignItems: "center", gap: 4 }}>
+            Feito com <Heart size={12} color="#ef4444" fill="#ef4444" /> em
+            React
+          </span>
+        </div>
+      </div>
+    </footer>
+  );
+}

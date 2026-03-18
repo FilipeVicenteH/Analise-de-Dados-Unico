@@ -1,0 +1,83 @@
+.flows-section { padding: 48px 0; }
+
+.flows-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.flow-card {
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.flow-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.flow-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flow-steps {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.flow-step-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.flow-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 8px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.3;
+  border: 1px solid transparent;
+  min-height: 44px;
+}
+
+.flow-step-start {
+  color: white;
+  border-color: transparent;
+}
+
+.flow-step-mid,
+.flow-step-end {
+  border-width: 1px;
+  border-style: solid;
+}
+
+.flow-arrow {
+  flex-shrink: 0;
+}
+
+.flow-description {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-top: auto;
+}
+
+@media (max-width: 900px) {
+  .flows-grid { grid-template-columns: 1fr; }
+}

@@ -1,0 +1,99 @@
+.attendance-section { padding: 48px 0; }
+
+.attendance-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 20px;
+}
+
+.chart-card {
+  padding: 28px;
+}
+
+.chart-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.chart-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.attendance-summary {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.attendance-summary-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  transition: all 0.3s ease;
+}
+
+.attendance-summary-item:hover {
+  border-color: var(--border-light);
+  transform: translateY(-2px);
+}
+
+.attendance-summary-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.attendance-summary-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.attendance-summary-name {
+  font-size: 14px;
+  font-weight: 600;
+  flex: 1;
+}
+
+.attendance-summary-pct {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.attendance-summary-count {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 8px;
+}
+
+.custom-tooltip {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  box-shadow: var(--shadow-md);
+}
+
+.tooltip-label {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-bottom: 4px;
+}
+
+.tooltip-value {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+@media (max-width: 800px) {
+  .attendance-grid { grid-template-columns: 1fr; }
+  .attendance-summary { grid-template-columns: 1fr; }
+}
